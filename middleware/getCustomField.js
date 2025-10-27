@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 function getDateCustomValues(obj) {
-  return obj.name.replace('disponible-palmarito-', '');
+  return obj.name.replace('disponible-', '');
 }
 
 const getCustomFields = async (req, res, next) => {
@@ -11,12 +11,12 @@ const getCustomFields = async (req, res, next) => {
     try {
         const response = await axios.get(API_CUSTOM_FIELDS, {
             headers: {
-                'Authorization': `Bearer ${process.env.API_KEY_PALMARITO}`,
+                'Authorization': `Bearer ${process.env.API_KEY_PAL_SKY}`,
                 'Content-Type': 'application/json'
             }
         });
 
-        console.log(response)
+        console.log(response.data?.customValues)
 
         if (!response.data) {
             return res.status(500).json({ error: 'No se pudo obtener los datos' });
@@ -28,7 +28,7 @@ const getCustomFields = async (req, res, next) => {
             const dateCustom = getDateCustomValues(custom)
             if (fecha === dateCustom) {
                 req.body.placesAvailable = parseInt(custom.value)
-            } else if(custom.name === 'cupos-diarios-palmarito') {
+            } else if(custom.name === 'cupos-diarios') {
                 req.body.placesAvailable = parseInt(custom.value)
             }
         });
