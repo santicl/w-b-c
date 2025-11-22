@@ -1,25 +1,25 @@
-app = "check-pal-wbc"
+app = "ghl-check-wbc"
 primary_region = "gru"
 
 [build]
-builder = "paketobuildpacks/builder:base"
-
-[env]
-PORT = "3000"
+  builder = "paketobuildpacks/builder:base"
 
 [[services]]
-internal_port = 3_000
-protocol = "tcp"
+  internal_port = 3000
+  protocol = "tcp"
 
   [[services.ports]]
-  handlers = [ "http" ]
-  port = 80
+    handlers = ["http"]
+    port = 80
 
   [[services.ports]]
-  handlers = [ "tls", "http" ]
-  port = 443
+    handlers = ["tls", "http"]
+    port = 443
 
   [[services.tcp_checks]]
-  grace_period = "10s"
-  interval = "15s"
-  timeout = "2s"
+    interval = "15s"
+    timeout = "2s"
+    grace_period = "10s"
+
+[env]
+  PORT = "3000" 
