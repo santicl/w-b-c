@@ -1,4 +1,4 @@
-app = "ghl-check-wbc"
+app = "back-wbc-api"
 primary_region = "gru"
 
 [build]
